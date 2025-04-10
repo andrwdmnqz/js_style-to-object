@@ -6,16 +6,19 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
-  const rows = sourceString.split(';');
   const propertiesObject = {};
 
-  for (let i = 0; i < rows.length; i++) {
-    if (rows[i].trim()) {
-      const splittedRow = rows[i].split(':');
+  sourceString
+    .split(';')
+    .map((a) => a.trim())
+    .filter((a) => a !== '')
+    .reduce((props, row) => {
+      const splittedRow = row.split(':');
 
-      propertiesObject[splittedRow[0].trim()] = splittedRow[1].trim();
-    }
-  }
+      props[splittedRow[0].trim()] = splittedRow[1].trim();
+
+      return props;
+    }, propertiesObject);
 
   return propertiesObject;
 }
