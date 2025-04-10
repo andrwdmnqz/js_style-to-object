@@ -6,7 +6,18 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
-  // write your code here
+  const rows = sourceString.split(';');
+  const propertiesObject = {};
+
+  for (let i = 0; i < rows.length; i++) {
+    if (rows[i].trim()) {
+      const splittedRow = rows[i].split(':');
+
+      propertiesObject[splittedRow[0].trim()] = splittedRow[1].trim();
+    }
+  }
+
+  return propertiesObject;
 }
 
 module.exports = convertToObject;
